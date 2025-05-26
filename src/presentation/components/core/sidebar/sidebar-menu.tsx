@@ -76,21 +76,18 @@ export const SidebarMenu: FC<SideBarMenuProps> = (props) => {
             highlighted={false}
             key={id}
             path={path}
-            className={ styles.sidebarMenuItemLinkStyle }
+            className={styles.sidebarMenuItemLinkStyle}
           >
-            <Link
-              aria-disabled={true}
-              href={path}
-            >
+            <Link aria-disabled={true} href={path}>
               <Highlight.Item
                 className={styles.sidebarAccordionTriggerItemStyle}
               >
                 {item}
               </Highlight.Item>
 
-                <Highlight.Text className={styles.sidebarTextStyle}>
-                  {title}
-                </Highlight.Text>
+              <Highlight.Text className={styles.sidebarTextStyle}>
+                {title}
+              </Highlight.Text>
             </Link>
           </FragmentedSidebarMenu.Highlight>
         );

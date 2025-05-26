@@ -4,6 +4,7 @@ import { Title } from "@components/core/title";
 import { MENU_RESOURCES_CONFIGS } from "@config/menu";
 import { ReactNode } from "react";
 import * as styles from "./styles.css";
+import Link from "next/link";
 
 export default function HomeLayout({ children }: { children: ReactNode }) {
   return (
@@ -12,14 +13,17 @@ export default function HomeLayout({ children }: { children: ReactNode }) {
         <Sidebar.Menu resources={MENU_RESOURCES_CONFIGS} />
       </Sidebar.Root>
       <div className={styles.containerPageStyles}>
-        <Header.Root>
-          <Header.LeftGroup className={styles.headerGroupStyles}>
-            <Title.Root size="small">
-              <Title.Text>Centrais </Title.Text>
-            </Title.Root>
-          </Header.LeftGroup>
+        <Header.Root className={styles.header}>
+          <Header.RightGroup className={styles.rightGroup}></Header.RightGroup>
         </Header.Root>
         {children}
+        <Header.LeftGroup className={styles.leftGroup}>
+          <Title.Root size="small">
+            <Title.Text>
+              <Link href="/centrais">Centrais</Link>
+            </Title.Text>
+          </Title.Root>
+        </Header.LeftGroup>
       </div>
     </main>
   );

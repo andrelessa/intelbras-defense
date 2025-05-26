@@ -4,7 +4,7 @@ import * as styles from "./styles/home-page.css";
 
 export const HomePage = () => {
   return (
-    <div className={styles.containerPage}>
+    <div className={styles.containerPageStyles}>
       <Title.Root size="medium">
         <Title.Text>HOME</Title.Text>
       </Title.Root>
