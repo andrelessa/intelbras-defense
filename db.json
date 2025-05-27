@@ -4,61 +4,37 @@
       "id": "79d4",
       "name": "Central 1",
       "mac": "12:34:45:67:89:83",
-      "modelId": "2"
+      "modelId": "4"
     },
     {
       "id": "79d4",
       "name": "Central 2",
       "mac": "12:34:45:67:89:83",
-      "modelId": "3"
+      "modelId": "5"
     },
     {
       "id": "79d4",
       "name": "Central 3",
       "mac": "12:34:45:67:89:83",
-      "modelId": "4"
+      "modelId": "1"
     },
     {
       "id": "79d4",
       "name": "Central 4",
       "mac": "12:34:45:67:89:83",
-      "modelId": "5"
+      "modelId": "2"
     },
     {
       "id": "79d4",
       "name": "Central 5",
       "mac": "12:34:45:67:89:83",
-      "modelId": "1"
-    },
-    {
-      "id": "79d4",
-      "name": "Central 6",
-      "mac": "12:34:45:67:89:83",
-      "modelId": "2"
-    },
-    {
-      "id": "79d4",
-      "name": "Central 7",
-      "mac": "12:34:45:67:89:83",
       "modelId": "3"
     },
     {
       "id": "acbc",
-      "name": "Central 8",
+      "name": "Central 6",
       "mac": "67:86:95:78:35:63",
       "modelId": "6"
-    },
-    {
-      "id": "3fef",
-      "name": "Central 9",
-      "mac": "34:32:34:13:43:41",
-      "modelId": "4"
-    },
-    {
-      "id": "c233",
-      "name": "Central 10",
-      "mac": "89:65:35:24:51:23",
-      "modelId": "2"
     }
   ],
   "models": [

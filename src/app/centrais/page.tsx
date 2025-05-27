@@ -26,14 +26,16 @@ export default function CentralsList() {
   const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
   const [isModalOpen, setModalOpen] = useState(false);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [itemsPerPage]);
+
   const { data: centrals = [] } = useQuery({
     queryKey: ["centrals"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:3001/centrals");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/centrals`);
       const data = await res.json();
-
       updateTotalCentrals(data.length);
-
       return data;
     },
   });
@@ -41,7 +43,7 @@ export default function CentralsList() {
   const { data: models = [] } = useQuery({
     queryKey: ["models"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:3001/models");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/models`);
       return res.json();
     },
   });
@@ -52,12 +54,13 @@ export default function CentralsList() {
 
   const deleteMutation = useMutation({
     mutationFn: async (id: number) => {
-      await fetch(`http://localhost:3001/centrals/${id}`, { method: "DELETE" });
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/centrals/${id}`, {
+        method: "DELETE",
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["centrals"] });
       decrementCount();
-
       setConfirmDeleteId(null);
       toast.success("Central excluída com sucesso!");
     },
@@ -100,32 +103,24 @@ export default function CentralsList() {
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / itemsPerPage));
 
-  // Função para exportar CSV
   const exportToCSV = () => {
     if (sorted.length === 0) {
       toast.error("Nenhum dado para exportar");
       return;
     }
 
-    // Cabeçalhos do CSV
     const headers = ["Nome", "MAC", "Modelo"];
-
-    // Dados das centrais (usando os dados filtrados e ordenados)
     const csvData = sorted.map((central: any) => [
       central.name,
       central.mac,
       central.modelName,
     ]);
 
-    // Combinar cabeçalhos com dados
     const allData = [headers, ...csvData];
-
-    // Converter para formato CSV
     const csvContent = allData
       .map((row) =>
         row
           .map((field) =>
-            // Escapar aspas duplas e envolver campos que contêm vírgulas/quebras de linha
             typeof field === "string" &&
             (field.includes(",") || field.includes('"') || field.includes("\n"))
               ? `"${field.replace(/"/g, '""')}"`
@@ -135,11 +130,9 @@ export default function CentralsList() {
       )
       .join("\n");
 
-    // Criar nome do arquivo com data atual
-    const currentDate = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+    const currentDate = new Date().toISOString().split("T")[0];
     const filename = `centrals-export-${currentDate}.csv`;
 
-    // Criar blob e fazer download
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
 
@@ -152,7 +145,6 @@ export default function CentralsList() {
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-
       toast.success(`Arquivo ${filename} exportado com sucesso!`);
     } else {
       toast.error("Seu navegador não suporta download de arquivos");
@@ -162,7 +154,6 @@ export default function CentralsList() {
   return (
     <div>
       <Header />
-
       <div className={styles.container}>
         <h1 className={styles.title}>Centrais</h1>
 
@@ -235,11 +226,12 @@ export default function CentralsList() {
             </tr>
           </thead>
           <tbody>
-            {paginated.map((central: any) => (
-              <tr key={central.id}>
+            {paginated.map((central: any, index) => (
+              <tr key={`${central.id}-${index}`}>
                 <td
                   className={styles.td}
                   onClick={() => router.push(`/centrais/${central.id}/editar`)}
+                  style={{ cursor: "pointer" }}
                 >
                   {central.name}
                 </td>

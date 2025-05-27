@@ -74,8 +74,6 @@ export default function CreateCentral() {
       setError("mac", { message: "MAC já cadastrado" });
       return;
     }
-
-    // Converter para FormData
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("mac", data.mac);
