@@ -182,7 +182,7 @@ export default function CentralsList() {
           <button
             onClick={exportToCSV}
             className={styles.button}
-            style={{ backgroundColor: "#28a745", marginLeft: "0.5rem" }}
+            style={{ backgroundColor: "#28a745" }}
           >
             Exportar CSV
           </button>
