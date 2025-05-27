@@ -35,7 +35,7 @@ export default function CreateCentral() {
   const { data: modelsData } = useQuery({
     queryKey: ["models"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:3001/models");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/models`);
       return res.json();
     },
   });
@@ -49,14 +49,14 @@ export default function CreateCentral() {
   const { data: centralsData = [] } = useQuery({
     queryKey: ["centrals"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:3001/centrals");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/centrals`);
       return res.json();
     },
   });
 
   const createCentral = useMutation({
     mutationFn: (newCentral: FormData) =>
-      fetch("/centrals", {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/centrals`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newCentral),
