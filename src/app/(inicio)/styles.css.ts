@@ -10,6 +10,24 @@ export const homeLayoutStyle = style({
   flexDirection: "row",
 });
 
+export const header = style({
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+});
+
+export const rightGroup = style({
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+});
+
+export const leftGroup = style({
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+});
+
 export const containerPageStyles = style({
   width: "100%",
   display: "flex",
